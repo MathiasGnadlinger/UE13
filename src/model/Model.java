@@ -40,13 +40,13 @@ public class Model
     public void saveToCSV()
     {
         CSV csv = new CSV();
-        csv.saveToFile("excel.csv",inputs);
+        csv.saveToFile("excel.csv",inputs);                                                                     //Speichern der inputs in Datei excel.csv
     }
 
     public void loadFromCSV()
     {
         CSV csv = new CSV();
-        inputs = csv.loadFromFile("excel.csv");
+        inputs = csv.loadFromFile("excel.csv");                                                                 //Auslesen der Datei excel.csv
         position = 1;
     }
 

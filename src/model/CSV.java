@@ -19,8 +19,8 @@ public class CSV
             String[] box;
             while((limit = bufferedReader.readLine()) != null)
             {
-                box = limit.split(";");
-                Input input = new Input(box[0], box[1], box[2]);
+                box = limit.split(";");                                                                           //Auslese der CSV Datei, Trennzeichen dabei ist ";"
+                Input input = new Input(box[0], box[1], box[2]);                                                        //Einzelne Auslese der Kästen
                 inputs.add(input);
             }
             bufferedReader.close();
@@ -39,12 +39,12 @@ public class CSV
         {
             FileWriter fw = new FileWriter(filename);
             BufferedWriter bw = new BufferedWriter(fw);
-            fw.write("Name;Adresse;Telefonnummer");
+            fw.write("Name;Adresse;Telefonnummer");                                                                 // Damit in Excel ein "Header" gemacht wird
             bw.newLine();
 
             for (Input input:inputs)
             {
-                bw.write(input.getName() + ";" + input.getAddress() + ";" + input.getPhone());
+                bw.write(input.getName() + ";" + input.getAddress() + ";" + input.getPhone());                      //Eintrag in CSV Datei mit Trennzeichen ";"
                 bw.newLine();
             }
             bw.close();

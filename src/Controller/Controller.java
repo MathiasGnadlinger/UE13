@@ -27,7 +27,7 @@ public class Controller
         }
         catch (Exception exception)
         {
-            System.out.printf("soldfhosdfiosdiof");
+            System.out.printf("Error while loading\n");
         }
 
     }
@@ -38,7 +38,7 @@ public class Controller
         print();
     }
 
-    @FXML void forward()
+    @FXML void forward()                                                                                                // Seitenanzahl um 1 erhöhen und aktualisieren
     {
         try {
             model.setPosition(model.getPosition() + 1);
@@ -50,7 +50,7 @@ public class Controller
         }
     }
 
-    @FXML void back()
+    @FXML void back()                                                                                                   // Seitenanzahl um 1 veringern und aktualisieren
     {
         try {
             model.setPosition(model.getPosition() - 1);
@@ -62,7 +62,7 @@ public class Controller
         }
     }
 
-    private void print ()
+    private void print ()                                                                                               // Augabe der Seitenanzahl, Tel.Nr, Adresse, und Name falls Einträge vorhanden sind
     {
         int entries = model.sizeOfBook();
         int position = model.getPosition();
@@ -78,12 +78,9 @@ public class Controller
             txtf_phone.setText(input.getPhone());
         }
 
-        else
+        else                                                                                                            // Seitenanzahl auf Null setzen wenn keine Einträge vorhanden sind
             {
             txtf_site.setText("0 von 0");
-            txtf_name.clear();
-            txtf_address.clear();
-            txtf_phone.clear();
         }
     }
 
