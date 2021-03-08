@@ -35,6 +35,6 @@
       <TextField fx:id="txtf_name" promptText="Max Mustermann" GridPane.columnIndex="1" />
       <TextField fx:id="txtf_address" promptText="Mustermannstraße 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="txtf_phone" promptText="0664 8514368" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField fx:id="txtf_site" promptText="1 von 1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="txtf_site" editable="false" promptText="1 von 1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
    </children>
 </GridPane>

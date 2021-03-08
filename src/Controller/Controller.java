@@ -21,7 +21,8 @@ public class Controller
 
     @FXML void loadFromCSV()
     {
-        try {
+        try
+        {
             model.loadFromCSV();
             print();
         }
@@ -34,13 +35,21 @@ public class Controller
 
     @FXML void saveToCSV()
     {
-        model.saveToCSV();
-        print();
+        try
+        {
+            model.saveToCSV();
+            print();
+        }
+        catch (Exception exception)
+        {
+            System.out.printf("Error while saving\n");
+        }
     }
 
     @FXML void forward()                                                                                                // Seitenanzahl um 1 erhöhen und aktualisieren
     {
-        try {
+        try
+        {
             model.setPosition(model.getPosition() + 1);
             print();
         }
@@ -52,7 +61,8 @@ public class Controller
 
     @FXML void back()                                                                                                   // Seitenanzahl um 1 veringern und aktualisieren
     {
-        try {
+        try
+        {
             model.setPosition(model.getPosition() - 1);
             print();
         }
@@ -108,7 +118,14 @@ public class Controller
 
      @FXML void saveChange()
      {
-         model.saveChange(new Input(txtf_name.getText(),txtf_address.getText(),txtf_phone.getText()));
-         print();
+         try
+         {
+             model.saveChange(new Input(txtf_name.getText(), txtf_address.getText(), txtf_phone.getText()));
+             print();
+         }
+         catch (Exception exception)
+         {
+             System.out.printf("Error while saving\n");
+         }
      }
 }

@@ -45,9 +45,16 @@ public class Model
 
     public void loadFromCSV()
     {
-        CSV csv = new CSV();
-        inputs = csv.loadFromFile("excel.csv");                                                                 //Auslesen der Datei excel.csv
-        position = 1;
+        try
+        {
+            CSV csv = new CSV();
+            inputs = csv.loadFromFile("excel.csv");                                                                 //Auslesen der Datei excel.csv
+            position = 1;
+        }
+        catch (Exception exception)
+        {
+            System.out.printf("Error while loading");
+        }
     }
 
     public int sizeOfBook()
