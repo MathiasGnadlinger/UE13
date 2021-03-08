@@ -1,15 +1,21 @@
 package Controller;
 
+import com.sun.tools.javac.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import model.Input;
 import model.Model;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * @author Mathias Gnadlinger
  * @version 12, 24.02.2021
  */
 
-public class Controller
+public class Controller implements Initializable
 {
     @FXML private TextField txtf_name;
     @FXML private TextField txtf_address;
@@ -17,6 +23,15 @@ public class Controller
     @FXML private TextField txtf_site;
 
     private Model model = new Model();
+    private Main main = new Main();
+
+
+    @FXML void ExitProgram()
+    {
+        saveToCSV();
+        System.exit(0);
+    }
+
 
 
     @FXML void loadFromCSV()
@@ -52,6 +67,7 @@ public class Controller
         {
             model.setPosition(model.getPosition() + 1);
             print();
+
         }
         catch (Exception exception)
         {
@@ -128,4 +144,18 @@ public class Controller
              System.out.printf("Error while saving\n");
          }
      }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        try
+        {
+            loadFromCSV();
+        }
+        catch (Exception exception)
+        {
+            System.out.printf("Error while loading");
+        }
+
+    }
 }

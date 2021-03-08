@@ -17,6 +17,8 @@ public class CSV
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
             String limit;
             String[] box;
+            bufferedReader.readLine();
+
             while((limit = bufferedReader.readLine()) != null)
             {
                 box = limit.split(";");                                                                           //Auslese der CSV Datei, Trennzeichen dabei ist ";"

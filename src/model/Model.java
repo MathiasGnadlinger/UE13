@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 public class Model
 {
-    private ArrayList<Input> inputs;
-    private int position;
+    public ArrayList<Input> inputs;
+    public int position;
 
     public Model()
     {
@@ -49,7 +49,7 @@ public class Model
         {
             CSV csv = new CSV();
             inputs = csv.loadFromFile("excel.csv");                                                                 //Auslesen der Datei excel.csv
-            position = 1;
+            position = 0;
         }
         catch (Exception exception)
         {
