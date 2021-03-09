@@ -1,6 +1,5 @@
 package Controller;
 
-import com.sun.tools.javac.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -30,14 +29,6 @@ public class Controller implements Initializable
     int maxinput = model.inputs.size();
 
 
-    @FXML void ExitProgram()
-    {
-        saveToCSV();
-        System.exit(0);
-    }
-
-
-
     @FXML void loadFromCSV()
     {
         try
@@ -52,22 +43,10 @@ public class Controller implements Initializable
 
     }
 
-    @FXML void saveToCSV()
-    {
-        try
-        {
-            model.saveToCSV();
-            print();
-        }
-        catch (Exception exception)
-        {
-            System.out.printf("Error while saving\n");
-        }
-    }
+
 
     @FXML void forward()                                                                                                // Seitenanzahl um 1 erhöhen und aktualisieren
     {
-
         try
         {
             if (model.getPosition() >= maxinput)
@@ -76,7 +55,6 @@ public class Controller implements Initializable
                 {
                     model.setPosition(model.getPosition() + 1);
                     positionmax = positionmax +1;
-
                 }
                 else
                 {
@@ -85,11 +63,10 @@ public class Controller implements Initializable
                 }
                 print();
             }
-
         }
         catch (Exception exception)
         {
-            System.out.printf("Error - Page is not available\n");
+            System.out.printf("Error while turning to the next page\n");
         }
     }
 
@@ -115,11 +92,17 @@ public class Controller implements Initializable
         }
     }
 
-
      @FXML void add()
      {
-         model.addInput(new Input(txtf_name.getText(), txtf_address.getText(),txtf_phone.getText()));
-         print();
+         if (txtf_name.getText().isEmpty() && txtf_address.getText().isEmpty() && txtf_phone.getText().isEmpty())
+         {
+             System.out.printf("Es muss in jedem Feld einen Eintrag geben\n");
+         }
+         else
+         {
+             model.addInput(new Input(txtf_name.getText(), txtf_address.getText(),txtf_phone.getText()));
+             print();
+         }
      }
 
      @FXML void delete ()
@@ -127,12 +110,15 @@ public class Controller implements Initializable
          try
          {
              model.delete();
+
+             txtf_phone.clear();
+             txtf_address.clear();
+             txtf_name.clear();
              print();
          }
          catch (Exception exception)
          {
              System.out.printf("Error - While deleting\n");
-             System.out.printf("Skip a page, then the page is gone\n");
          }
 
      }
@@ -150,12 +136,16 @@ public class Controller implements Initializable
          }
      }
 
+
     @FXML
-    public void onlyNumbers(){
-        txtf_phone.textProperty().addListener(new ChangeListener<String>() {
+    public void onlyNumbers(){                                                                                          //Funktion das nur Zahlen eingegeben werden dürfen
+        txtf_phone.textProperty().addListener(new ChangeListener<String>()
+        {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+            {
+                if (!newValue.matches("\\d*"))
+                {
                     txtf_phone.setText(oldValue);
                 }
             }

@@ -1,6 +1,9 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * @author Mathias Gnadlinger
  * @version 12, 24.02.2021
@@ -9,11 +12,38 @@ public class Model
 {
     public ArrayList<Input> inputs;
     public int position;
+    final String FILEPATH = System.getProperty("user.dir") + "\\Addressbook.csv";
+    File file = new File(FILEPATH);
+
 
     public Model()
     {
-        this.inputs = new ArrayList<Input>();
-        this.position = 0;
+        try {
+            this.inputs = new ArrayList<>();
+            this.position = 0;
+            if (file.createNewFile())
+            {
+                System.out.printf("Addressbook.csv was created");
+            }
+        }
+        catch (Exception exception)
+        {
+        }
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable()
+        {
+            public void run()
+            {
+                try
+                {
+                    saveToCSV();
+                }
+                catch (Exception exception)
+                {
+                    exception.printStackTrace();
+                }
+            }
+        }, "Shutdown-thread"));
     }
 
     public int getPosition()
@@ -34,27 +64,21 @@ public class Model
     public void addInput(Input input)
     {
         inputs.add(input);
-        position = inputs.indexOf(input);
+        Collections.sort(inputs);
+        position = 0;
     }
 
     public void saveToCSV()
     {
         CSV csv = new CSV();
-        csv.saveToFile("excel.csv",inputs);                                                                     //Speichern der inputs in Datei excel.csv
+        csv.saveToFile("Addressbook.csv",inputs);                                                                     //Speichern der inputs in Datei excel.csv
     }
 
     public void loadFromCSV()
     {
-        try
-        {
             CSV csv = new CSV();
-            inputs = csv.loadFromFile("excel.csv");                                                                 //Auslesen der Datei excel.csv
+            inputs = csv.loadFromFile("Addressbook.csv");                                                                 //Auslesen der Datei excel.csv
             position = 0;
-        }
-        catch (Exception exception)
-        {
-            System.out.printf("Error while loading");
-        }
     }
 
     public int sizeOfBook()
@@ -65,7 +89,6 @@ public class Model
     public void delete()
     {
         inputs.remove(position);
-        position--;
     }
 
     public void saveChange(Input input)
