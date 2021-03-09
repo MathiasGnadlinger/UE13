@@ -23,7 +23,6 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Button fx:id="btn_back" mnemonicParsing="false" onMouseClicked="#back" prefHeight="25.0" prefWidth="172.0" text="&lt;&lt;" GridPane.rowIndex="3" />
       <Button fx:id="btn_add" mnemonicParsing="false" onMouseClicked="#add" prefHeight="28.0" prefWidth="173.0" text="Hinzufügen" GridPane.rowIndex="4" />
       <Button fx:id="btn_loadCSV" mnemonicParsing="false" onMouseClicked="#loadFromCSV" prefHeight="25.0" prefWidth="173.0" text="Von CVS laden" GridPane.rowIndex="5" />
       <Button fx:id="btn_delete" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="25.0" prefWidth="149.0" text="Löschen" GridPane.columnIndex="1" GridPane.rowIndex="4" />

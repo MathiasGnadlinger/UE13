@@ -1,6 +1,8 @@
 package Controller;
 
 import com.sun.tools.javac.Main;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -23,7 +25,9 @@ public class Controller implements Initializable
     @FXML private TextField txtf_site;
 
     private Model model = new Model();
-    private Main main = new Main();
+
+    int positionmax;
+    int maxinput = model.inputs.size();
 
 
     @FXML void ExitProgram()
@@ -63,24 +67,25 @@ public class Controller implements Initializable
 
     @FXML void forward()                                                                                                // Seitenanzahl um 1 erhöhen und aktualisieren
     {
+
         try
         {
-            model.setPosition(model.getPosition() + 1);
-            print();
+            if (model.getPosition() >= maxinput)
+            {
+                if (positionmax < model.inputs.size() -1)
+                {
+                    model.setPosition(model.getPosition() + 1);
+                    positionmax = positionmax +1;
 
-        }
-        catch (Exception exception)
-        {
-            System.out.printf("Error - Page is not available\n");
-        }
-    }
+                }
+                else
+                {
+                    model.setPosition(0);
+                    positionmax = 0;
+                }
+                print();
+            }
 
-    @FXML void back()                                                                                                   // Seitenanzahl um 1 veringern und aktualisieren
-    {
-        try
-        {
-            model.setPosition(model.getPosition() - 1);
-            print();
         }
         catch (Exception exception)
         {
@@ -145,12 +150,26 @@ public class Controller implements Initializable
          }
      }
 
+    @FXML
+    public void onlyNumbers(){
+        txtf_phone.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txtf_phone.setText(oldValue);
+                }
+            }
+        });
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         try
         {
             loadFromCSV();
+            onlyNumbers();
         }
         catch (Exception exception)
         {
